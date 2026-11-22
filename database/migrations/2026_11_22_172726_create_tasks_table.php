@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('priority', ['high', 'medium', 'low'])->default('low');
             $table->smallInteger('progress')->default(0);
             $table->timestamp('due_date')->nullable();
-            $table->foreignId('created_by')->constrained('users')->casca()->noActionOnUpdate();
+            $table->foreignId('created_by')->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->timestamps();
         });
     }
