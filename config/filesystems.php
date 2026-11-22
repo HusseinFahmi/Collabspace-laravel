@@ -62,6 +62,14 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'user_avatar' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/user_avatar'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage/user_avatar',
+            'visibility' => 'private',
+            'throw' => false,
+            'report' => false,
+        ],
 
         's3' => [
             'driver' => 's3',
