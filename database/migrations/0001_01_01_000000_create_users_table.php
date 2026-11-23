@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('email', 255)->unique();
             $table->string('password', 255);
             $table->string('remember_token', 64)->nullable();
+            $table->boolean('must_change_password')->default(true);
             $table->softDeletes();
             $table->timestamps();
 

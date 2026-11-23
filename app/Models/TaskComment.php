@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,19 +11,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'task_id',
     'user_id',
     'comment',
+    'created_at'
 ])]
-#[Hidden([])]
+
 class TaskComment extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
-public function task(): BelongsTo
-{
-    return $this->belongsTo(Task::class, 'task_id');
-}
-public function user(): BelongsTo
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
+
+    public function task(): BelongsTo{
+        return $this->belongsTo(Task::class);
+    }
+
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class);
+    }
+
+    
+    protected function casts(): array{
+        return [
+            'created_at' => 'datetime',
+        ];
+    }
+
 }

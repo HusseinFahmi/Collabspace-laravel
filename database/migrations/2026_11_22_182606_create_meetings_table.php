@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('meeting_url', 500);
             $table->string('recording_url', 500)->nullable();
             $table->text('ai_summary')->nullable();
-            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->timestamps();
         });
     }

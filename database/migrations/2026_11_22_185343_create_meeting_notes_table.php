@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meeting_notes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meeting_id')->constrained('meetings')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->text('content');
             $table->timestamps();
         });

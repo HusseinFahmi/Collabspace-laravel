@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 #[Fillable([
     'task_id',
@@ -12,8 +12,28 @@ use Illuminate\Database\Eloquent\Model;
     'assigned_by',
     'assigned_at',
 ])]
-#[Hidden([])]
-class TaskAssignment extends Model
+
+class TaskAssignment extends Pivot
 {
+    public $incrementing = true;
+    public $timestamps = false;
+
+    public function task(): BelongsTo{
+        return $this->belongsTo(Task::class);
+    }
+
+    public function assignee(): BelongsTo{
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function assigner(): BelongsTo{
+        return $this->belongsTo(User::class, 'assigned_by');
+    }
     
+    protected function casts(): array{
+        return [
+            'assigned_at' => 'datetime',
+        ];
+    }
+
 }

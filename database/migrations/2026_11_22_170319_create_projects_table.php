@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'done', 'archived'])->default('active');
             $table->enum('priority', ['high', 'medium', 'low'])->default('low');
             $table->string('project_type', 100);
-            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->timestamps();
         });
     }

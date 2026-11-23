@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable([
     'message_id',
@@ -12,9 +12,21 @@ use Illuminate\Database\Eloquent\Model;
     'file_path',
     'mime_type',
     'file_size',
+    'created_at'
 ])]
-#[Hidden([])]
+
 class MessageAttachment extends Model
 {
-    //
+    public $timestamps = false;
+
+    public function message(): BelongsTo{
+        return $this->belongsTo(Message::class);
+    }
+
+    protected function casts(): array{
+        return [
+            'file_size'  => 'integer',
+            'created_at' => 'datetime',
+        ];
+    }
 }

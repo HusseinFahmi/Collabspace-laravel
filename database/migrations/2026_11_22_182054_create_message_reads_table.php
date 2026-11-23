@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('message_id')->constrained('messages')->cascadeOnDelete()->noActionOnUpdate();
 
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->timestamp('read_at')->nullable();
 
             $table->unique(['message_id', 'user_id'], 'Message_reads_unique_0');

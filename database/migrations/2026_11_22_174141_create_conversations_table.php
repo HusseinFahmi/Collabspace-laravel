@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name', 255)->nullable();
             $table->foreignId('project_id')->nullable()->constrained('projects')->cascadeOnDelete()->noActionOnUpdate();
             $table->foreignId('team_id')->nullable()->constrained('teams')->cascadeOnDelete()->noActionOnUpdate();
-            $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->timestamps();
         });
     }

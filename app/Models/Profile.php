@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -19,18 +18,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'years_of_experience',
     'joined_at',
 ])]
-#[Hidden([])]
+
 class Profile extends Model
 {
     public $timestamps = false;
-    public function user():BelongsTo{
-    return $this->BelongsTo(User::class);
+
+    public function user(): BelongsTo{
+        return $this->BelongsTo(User::class);
     }
 
     protected function casts(): array{
         return [
-            'joined_at' => 'datetime',
-            'updated_at' => 'datetime'
+            'years_of_experience' => 'integer',
+            'joined_at'           => 'datetime',
+            'updated_at'          => 'datetime',
         ];
     }
 
