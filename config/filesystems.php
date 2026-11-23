@@ -46,6 +46,30 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'message_attachments' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/message_attachments'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage/message_attchment',
+            'visibility' => 'private',
+            'throw' => false,
+            'report' => false,
+        ],
+        'project_files' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/project_files'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage/project_files',
+            'visibility' => 'private',
+            'throw' => false,
+            'report' => false,
+        ],
+        'user_avatar' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/user_avatar'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage/user_avatar',
+            'visibility' => 'private',
+            'throw' => false,
+            'report' => false,
+        ],
 
         's3' => [
             'driver' => 's3',
