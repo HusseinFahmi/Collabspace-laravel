@@ -53,4 +53,12 @@ public function assignees(): BelongsToMany
         'user_id'
     )->withPivot(['assigned_by', 'assigned_at']);
 }
+
+protected function casts(): array
+{
+    return [
+        'due_date' => 'datetime',
+    ];
+}
+
 }

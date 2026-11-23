@@ -18,7 +18,7 @@ class UserResource extends JsonResource
         return [
             "id"=>$this->id,
             "full_name"=>$this->full_name,
-            "avatar_path"=>Storage::disk("user_avatar")->path($this->avatar_path),
+            "avatar_path" => $this->avatar_path ? Storage::disk("user_avatar")->url($this->avatar_path) : null,
             "joined_at"=>$this->joined_at->format("Y-m-d"),
             "specialty"=>$this->specialty,
             "about"=>$this->about,

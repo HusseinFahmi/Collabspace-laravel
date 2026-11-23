@@ -19,8 +19,11 @@ class AuthUserResource extends JsonResource
         return[
             "id"=>$this->id,
             "email"=>$this->email,
-            "full_name"=>$this->full_name,
-            "avatar_path"=>Storage::disk("user_avatar")->path($this->avatar_path),
+            'full_name' => $this->whenLoaded('profile',fn () => $this->profile?->full_name),
+            'avatar_path' => $this->whenLoaded('profile', fn () => $this->profile?->avatar_path
+    ? Storage::disk('user_avatar')->url($this->profile->avatar_path)
+    : null
+),
 
         ];
     }

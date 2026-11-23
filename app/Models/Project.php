@@ -40,4 +40,11 @@ public function tasks():HasMany{
 public function members():BelongsToMany{
     return $this->belongsToMany(User::class , "project_members","project_id","user_id");
 }
+protected function casts(): array
+{
+    return [
+        'start_date' => 'date',
+        'deadline' => 'date',
+    ];
+}
 }
