@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meeting_transcripts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meeting_id')->constrained('meetings')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('speaker_id')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('speaker_id')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->string('speaker_name', 150);
             $table->unsignedInteger('offset_seconds')->default(0);   
             $table->string('language', 20)->default('en');

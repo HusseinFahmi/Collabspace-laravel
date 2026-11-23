@@ -2,20 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Console\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['user_id', 'full_name', 'avatar_path', 'joined_at', 'specialty', 'about', 'phone_number' ])]
-#[Hidden(['password', 'remember_token'])]
+#[Fillable([
+    'user_id',
+    'full_name',
+    'avatar_path',
+    'specialty',
+    'about',
+    'phone_number',
+    'availability_status',
+    'job_title',
+    'years_of_experience',
+    'joined_at',
+])]
+
 class Profile extends Model
 {
     public $timestamps = false;
 
+    public function user(): BelongsTo{
+        return $this->BelongsTo(User::class);
+    }
+
     protected function casts(): array{
         return [
-            'joined_at' => 'datetime',
-            'updated_at' => 'datetime'
+            'years_of_experience' => 'integer',
+            'joined_at'           => 'datetime',
+            'updated_at'          => 'datetime',
         ];
     }
 

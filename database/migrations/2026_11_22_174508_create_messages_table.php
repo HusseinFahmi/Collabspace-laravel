@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('conversation_id')->constrained('conversations')->cascadeOnDelete()->noActionOnUpdate();
-            $table->foreignId('sender_id')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('sender_id')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->text('body')->nullable();
             $table->enum('type', ['text', 'image', 'file'])->default('text');
             $table->foreignId('reply_to_message_id')->nullable()->constrained('messages')->cascadeOnDelete()->noActionOnUpdate();
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

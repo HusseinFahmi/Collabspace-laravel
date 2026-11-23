@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('project_files', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete()->noActionOnUpdate();
-            $table->foreignId('upload_by')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('upload_by')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->string('name', 255);
             $table->string('file_path', 500);
             $table->string('mime_type', 100);
             $table->string('extension', 20);
             $table->bigInteger('file_size');
             $table->timestamp('uploaded_at');
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
             $table->timestamp('updated_at')->nullable();
         });
     }

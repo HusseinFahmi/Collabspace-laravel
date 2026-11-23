@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete()->noActionOnUpdate();
             $table->foreignId('team_id')->constrained('teams')->cascadeOnDelete()->noActionOnUpdate();
-            $table->foreignId('reviewer_id')->nullable()->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('reviewer_id')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->string('title', 255);
             $table->text('description')->nullable();
             $table->enum('status', ['todo', 'in_progress', 'in_review', 'completed'])->default('todo');
             $table->enum('priority', ['high', 'medium', 'low'])->default('low');
-            $table->smallInteger('progress')->default(0);
+            $table->unsignedTinyInteger('progress')->default(0);
             $table->timestamp('due_date')->nullable();
-            $table->foreignId('created_by')->constrained('users')->casca()->noActionOnUpdate();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->timestamps();
         });
     }

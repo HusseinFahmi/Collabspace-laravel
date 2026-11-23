@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('conversation_id')->constrained('conversations')->cascadeOnDelete()->noActionOnUpdate();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
             $table->enum('role', ['admin', 'owner', 'member'])->default('member');
-            $table->timestamp('joined_at');
-            $table->foreignId('last_read_message_id')->nullable()->constrained('messages')->cascadeOnDelete()->noActionOnUpdate();
+            $table->timestamp('joined_at')->useCurrent();
+            $table->foreignId('last_read_message_id')->nullable()->constrained('messages')->nullOnDelete()->noActionOnUpdate();
             $table->timestamp('muted_at')->nullable();
             $table->timestamp('archived_at')->nullable();
 

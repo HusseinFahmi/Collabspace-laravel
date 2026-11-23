@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meeting_comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meeting_id')->constrained('meetings')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->noActionOnUpdate();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete()->noActionOnUpdate();
             $table->text('comment');
             $table->timestamp('created_at')->useCurrent();
         });
